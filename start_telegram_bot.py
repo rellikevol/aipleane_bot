@@ -1,0 +1,22 @@
+from aiogram import executor, types
+from telegram_bot.database import create_db, insert_devs_message
+from telegram_bot.globals import db_name
+from telegram_bot.create_bot import dp
+from telegram_bot.handlers.message_for_devs import register_message_for_devs_handlers
+from telegram_bot.handlers.start import register_start_handlers
+from telegram_bot.handlers.send import register_create_send_handlers
+from telegram_bot.handlers.suitable_requests import register_suitable_requests_handlers
+from telegram_bot.handlers.carry import register_create_carry_handlers
+from telegram_bot.handlers.my_requests import register_my_requests_handlers
+
+create_db(db_name)
+
+
+register_start_handlers(dp)
+register_create_send_handlers(dp)
+register_suitable_requests_handlers(dp)
+register_create_carry_handlers(dp)
+register_my_requests_handlers(dp)
+register_message_for_devs_handlers(dp)
+
+executor.start_polling(dp, skip_updates=True)
